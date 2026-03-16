@@ -15,7 +15,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass-nav">
       <div className="container flex items-center justify-between h-16">
-        <span className="text-xl font-bold text-foreground">TestSite</span>
+        <span className="text-xl font-bold text-foreground">URR034</span>
         <div className="hidden md:flex gap-8">
           {links.map((l) => (
             <button key={l} onClick={() => scrollTo(l)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-200">

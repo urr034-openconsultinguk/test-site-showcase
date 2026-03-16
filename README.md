@@ -64,6 +64,27 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
+## Self-host (Docker) + Auto-Deploy (GitHub Actions)
+
+This repo includes:
+
+- `compose.yml` to run the site with nginx + TLS
+- `.github/workflows/ci.yaml` to build/test on PRs and `main`
+- `.github/workflows/deploy.yaml` to SSH into your server on `main` pushes and run `docker compose up -d --build`
+
+### Required GitHub Secrets (repo settings)
+
+- `DEPLOY_HOST` (server hostname/IP)
+- `DEPLOY_PORT` (SSH port, usually `22`)
+- `DEPLOY_USER` (SSH user)
+- `DEPLOY_SSH_KEY` (private key for that user)
+- `DEPLOY_PATH` (path on the server where the repo is cloned)
+
+### TLS cert directory
+
+By default `compose.yml` mounts `./ssl/urr034.dev.openconsultinguk.com` to `/etc/letsencrypt` inside the container.
+Override with `LETSENCRYPT_DIR` if your certs live elsewhere.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

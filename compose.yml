@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    image: test-frontend:latest
+    container_name: test-frontend
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      # Mount full LetsEncrypt-style tree so live/ symlinks resolve into archive/
+      # Host path: /home/urr034/test-site-showcase/ssl/urr034.dev.openconsultinguk.com/...
+      - /home/urr034/test-site-showcase/ssl/urr034.dev.openconsultinguk.com:/etc/letsencrypt:ro
+    restart: unless-stopped
