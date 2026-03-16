@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+# TLS certs (keep out of git)
+ssl/*
+generate-config.sh

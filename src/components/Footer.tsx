@@ -5,8 +5,8 @@ const Footer = () => (
     <div className="container">
       <div className="grid md:grid-cols-3 gap-8 mb-8">
         <div>
-          <h3 className="text-lg font-semibold mb-4">TestSite</h3>
-          <p className="text-primary-foreground/70 text-sm">© 2022 TestSite. All rights reserved.</p>
+          <h3 className="text-lg font-semibold mb-4">URR034</h3>
+          <p className="text-primary-foreground/70 text-sm">© 2022 URR034. All rights reserved.</p>
         </div>
         <div>
           <h3 className="text-lg font-semibold mb-4">Contact</h3>
