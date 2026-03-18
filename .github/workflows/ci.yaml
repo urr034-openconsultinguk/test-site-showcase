@@ -2,37 +2,32 @@ name: CI & Deploy Website
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request: {}
 
 jobs:
-  build:
-    name: Build app
+  build-and-test:
+    name: Build Docker image
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build app
-        run: npm run build
+      - name: Build Docker image
+        run: docker build -t test-website:ci -f dockerfile .
 
   deploy:
-    name: Deploy to server
+    name: Deploy Website
     runs-on: ubuntu-latest
-    needs: build
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
-      - name: Deploy over SSH
+      - name: SSH and deploy
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.SERVER_IP }}
@@ -41,6 +36,6 @@ jobs:
           script: |
             set -e
             cd /home/urr034/test-site-showcase || exit 1
-            git pull --ff-only origin main
+            git pull origin main
             docker compose up -d --build
             docker compose ps
