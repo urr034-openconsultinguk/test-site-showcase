@@ -13,7 +13,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-6xl font-bold text-foreground mb-6"
         >
-          Welcome to URR034
+          Welcome to URR034 <br>Open Consulting</br>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
